@@ -2,7 +2,7 @@
  * 
  * Author: withtahmid
  * Created: 16-07-22 23:59
- * Updated: 09-08-22 02:15
+ * Updated: 09-08-22 02:52
  * 
  * */
 #include<bits/stdc++.h>
@@ -99,24 +99,19 @@ bool create_files()
 }
 void create_io_files()
 {
-	ofstream input("input.txt");
+	string fileName = path;
+	fileName += "input.txt";
+	ofstream input(fileName);
 	input.close();
-	ofstream output("output.txt");
+	fileName = path;
+	fileName += "output.txt";
+	ofstream output(fileName);
 	output.close();
 }
 void open_files_in_sublime_text()
 {
 	string command ="subl "; 
 	command += path;
-	command += "A.cpp";
-	system(command.c_str());
-	command ="subl "; 
-	command += path;
-	command += "input.txt";
-	system(command.c_str());
-	command ="subl "; 
-	command += path;
-	command += "output.txt";
 	system(command.c_str());
 }
 int main()
@@ -127,14 +122,12 @@ int main()
 	{
 		if(create_files())
 		{
-			//create_io_files();
+			create_io_files();
 			open_files_in_sublime_text();
 			cout << endl << "cd "<<path<<endl;
 		}
 		else
-			cout << "Couldn't create file\n";
-		
-		
+			cout << "Couldn't create file\n";	
 	}
 	else
 	
