@@ -19,6 +19,7 @@ using namespace std;
 #define ub(v,n) upper_bound(v.begin(), v.end(), n)
 #define lb(v,n) lower_bound(v.begin(), v.end(), n)
 #define pb push_back
+#define decimal(n) fixed << setprecision(n)
 #define test_case int t, c = 0; cin>>t;/*cin.ignore()*/ while(t--)
 #define debug cout<<"I am here\n";
 template <typename Type> void operator>>(istream& istream, vector<Type>& v){for(auto& i : v) cin>>i; }
@@ -31,7 +32,7 @@ void file_io(){
 }
 int main()
 {
-	file_io();
+    file_io();
     boostIO
     
 }
