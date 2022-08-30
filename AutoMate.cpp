@@ -3,6 +3,7 @@
  * Author: withtahmid
  * Created: 16-07-22 23:59
  * Updated: 09-08-22 02:52
+ * Updated: 30-08-22 20:40
  * 
  * */
 #include<bits/stdc++.h>
@@ -34,7 +35,7 @@ void generate_path()
 	cin >> c >> type >> folderName >> numOfFile;
 	if(c == 'C' || c == 'c')
 	{		
-		path += "CodeForces/div";
+		path += "Codeforces/div";
 		path += type;
 		path += "/";
 		path += folderName;
