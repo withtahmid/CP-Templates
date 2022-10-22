@@ -4,6 +4,7 @@
  * Created: 16-07-22 23:59
  * Updated: 09-08-22 02:52
  * Updated: 30-08-22 20:40
+ * Updated: 23-10-22 03:45
  * 
  * */
 #include<bits/stdc++.h>
@@ -14,6 +15,7 @@
 using namespace std;
 string dateNtime = " * Created: ";
 string path = "Codes/";
+string random_filename;
 int numOfFile;
 void generate_date()
 {
@@ -27,14 +29,14 @@ void generate_date()
   	dateNtime += str;
 }
 
-void generate_path()
+bool generate_path()
 {
 	char c;
 	char type;
 	string folderName;
-	cin >> c >> type >> folderName >> numOfFile;
+	cin >> c;
 	if(c == 'C' || c == 'c')
-	{		
+	{	cin>> type >> folderName >> numOfFile;
 		path += "Codeforces/div";
 		path += type;
 		path += "/";
@@ -43,17 +45,26 @@ void generate_path()
 	}
 	else if(c == 'A' || c == 'a')
 	{
-		
+		cin>> type >> folderName >> numOfFile;
 		path += "Atcoder/";
 		type == 'b' || type == 'B' ? path +=  "Beginner" : path +=  "Regular" ;
 		path += "/";
 		path += folderName;
 		path += '/';
 	}
+	else if(c == 'r' || c == 'R')
+	{
+		cin >> random_filename;
+		cout << random_filename;
+		path += "Random/";
+		numOfFile = 1;
+		return false;
+	}
 	else
 	{
-		path = "no_path";
+		path = "no-path";
 	}
+	return true;
 }
 
 
@@ -89,6 +100,9 @@ bool create_files()
 		    }
 		    ini_file.close();
 		    out_file.close();
+		   	string command ="subl "; 
+			command += fileName;
+			system(command.c_str());
 		}
 	}
 	else
@@ -96,6 +110,36 @@ bool create_files()
 		cout<<"Some error occoured\n";
 		return false;
 	}
+	return true;
+}
+bool create_random_file()
+{	
+	string fileName = path;
+	fileName += random_filename;
+    fileName += ".cpp";
+	string line;
+    ifstream ini_file{
+        "Template.cpp"
+    };
+    
+    ofstream out_file{fileName};
+    if (ini_file && out_file) {
+  
+        while (getline(ini_file, line)) {
+        	if(line == " * Created: dd-mm-yy hh:mm"){
+        		line = dateNtime;
+        	}
+            out_file << line << "\n";
+        }
+    }
+    else {
+       cout<< "Cannot create file"<<endl;
+    	return false;
+    }
+    ini_file.close();
+    out_file.close();
+    path += random_filename;
+    path += ".cpp";
 	return true;
 }
 void create_io_files()
@@ -118,20 +162,36 @@ void open_files_in_sublime_text()
 int main()
 {
 	generate_date();
-	generate_path();
+	bool status =  generate_path();
 	if(path != "no-path" && numOfFile > 0)
 	{
-		if(create_files())
+		if(status)
 		{
-			create_io_files();
-			open_files_in_sublime_text();
-			cout << endl << "cd "<<path<<endl;
+			if(create_files())
+			{
+				cout << endl << "cd "<<path<<endl;
+			}
+			else{
+				cout << "Couldn't create file\n";	
+			}
 		}
 		else
-			cout << "Couldn't create file\n";	
+		{
+			if(create_random_file())
+			{
+				open_files_in_sublime_text();
+				cout << endl << "cd "<<path<<endl;
+			}
+			else{
+				cout << "Couldn't create file\n";	
+			}
+		}
 	}
-	else
-	
+
+	else{
 		cout << "Invalid Path or File number\n";
+	}
+	
+		
 
 }
