@@ -505,11 +505,7 @@ bool areBracketsBalanced(string expr)
                 temp.push(expr[i]);
             }
         }
-        if(temp.empty())
-        {
-            return true;
-        }
-        return false;
+        return temp.empty();
 }
 
 ///largest area of same base in a Histogram
@@ -632,6 +628,15 @@ bool isLeapYear(int year)
 
     return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
+
+///// PBDS ////
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T> 
+using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+/////////////////
 int main()
 {
 	test_case{
