@@ -8,14 +8,16 @@ using namespace __gnu_pbds;
 template<class T> 
 using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+void io(){
+	freopen("/home/withtahmid/input.txt", "r", stdin);
+    freopen("/home/withtahmid/output.txt", "w", stdout);
+    freopen("/home/withtahmid/error.txt", "w", stderr);
+}
 /////////////////////////////
 ///////////   FULLLL ?????????????????????????????????
 // premitive types
 void full_debug(int x){ 
 	cerr << x; 
-}
-void full_debug(long x){
- cerr << x; 
 }
 void full_debug(int_fast64_t x){
  cerr << x; 
@@ -190,7 +192,6 @@ void full_debug(deque<T>Q)
 
 // premitive types
 void _debug(int x){ cerr << x; }
-void _debug(long x){ cerr << x; }
 void _debug(int_fast64_t x){ cerr << x; }
 void _debug(unsigned long long x){ cerr << x; }
 void _debug(char x){ cerr << x; }
