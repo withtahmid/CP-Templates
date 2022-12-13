@@ -7,13 +7,22 @@ typedef int_fast64_t ll;
 using namespace __gnu_pbds;
 template<class T> 
 using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
+#define debug(...) cerr<<"[" << #__VA_ARGS__ <<"] --> "; _debug(__VA_ARGS__); cerr << endl
+#define dd(...) cerr<<"[" << #__VA_ARGS__ <<"] --> "; _debug(__VA_ARGS__); cerr << endl
+/////////////////////////////
 void io(){
 	freopen("/home/withtahmid/input.txt", "r", stdin);
     freopen("/home/withtahmid/output.txt", "w", stdout);
     freopen("/home/withtahmid/error.txt", "w", stderr);
 }
+////////////////////////////
+
 /////////////////////////////
+const char* filename(string path, string file){
+	path += file;
+	path += ".txt";
+	return path.c_str();
+}
 ///////////   FULLLL ?????????????????????????????????
 // premitive types
 void full_debug(int x){ 
