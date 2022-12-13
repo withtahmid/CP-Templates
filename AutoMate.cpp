@@ -5,6 +5,7 @@
  * Updated: 09-08-22 02:52
  * Updated: 30-08-22 20:40
  * Updated: 23-10-22 03:45
+ * Updated: 14-12-22 02:50
  * 
  * */
 #include<bits/stdc++.h>
@@ -14,18 +15,22 @@
 #include <fstream>
 using namespace std;
 string dateNtime = " * Created: ";
-string path = "Codes/";
+string path = "";
 string random_filename;
 int numOfFile;
+string random_name = "";
 void generate_date()
 {
 	time_t rawtime;
   	struct tm * timeinfo;
-  	char buffer[80];
+  	char buffer[80], rand[50];
  	time (&rawtime);
   	timeinfo = localtime(&rawtime);
   	strftime(buffer,sizeof(buffer),"%d-%m-%Y %H:%M:%S",timeinfo);
+  	strftime(rand,sizeof(buffer),"%d-%m-%Y-%H-%M-%S",timeinfo);
   	string str(buffer);
+  	string randd(rand);
+  	random_name = randd;
   	dateNtime += str;
 }
 
@@ -55,8 +60,7 @@ bool generate_path()
 	else if(c == 'r' || c == 'R')
 	{
 		cin >> random_filename;
-		cout << random_filename;
-		path += "Random/";
+		path += "Codes/Random/";
 		numOfFile = 1;
 		return false;
 	}
@@ -86,9 +90,12 @@ bool create_files()
 		    };
 		    
 		    ofstream out_file{ fileName};
-		    if (ini_file && out_file) {
+		    if (ini_file and out_file) {
 		  
 		        while (getline(ini_file, line)) {
+		        	while(line.size() and line[line.size()-1] == 13){
+		        		line.pop_back();
+		        	}
 		        	if(line == " * Created: dd-mm-yy hh:mm")
 		        		line = dateNtime;
 		            out_file << line << "\n";
@@ -114,6 +121,9 @@ bool create_files()
 }
 bool create_random_file()
 {	
+	if(random_filename == "xx"){
+		random_filename = random_name;
+	}
 	string fileName = path;
 	fileName += random_filename;
     fileName += ".cpp";
@@ -126,6 +136,9 @@ bool create_random_file()
     if (ini_file && out_file) {
   
         while (getline(ini_file, line)) {
+        	while(line.size() and line[line.size()-1] == 13){
+        		line.pop_back();
+        	}
         	if(line == " * Created: dd-mm-yy hh:mm"){
         		line = dateNtime;
         	}
@@ -191,7 +204,4 @@ int main()
 	else{
 		cout << "Invalid Path or File number\n";
 	}
-	
-		
-
 }

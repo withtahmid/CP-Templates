@@ -1,7 +1,7 @@
 /**
  * 
  * Author: withtahmid
-* Created: dd-mm-yy hh:mm
+ * Created: dd-mm-yy hh:mm
  * 
  * */
 #include <bits/stdc++.h>
