@@ -126,7 +126,7 @@ public:
 		while(not q.empty()){
 			auto x = q.front();
 			q.pop();
-			if(distance[x.to] ^ INT_MAX){
+			if(distance[x.to] != INT_MAX){
 				for(auto i : graph[x.to]){
 					if(distance[i.to] > distance[x.to] + 1){
 						distance[i.to] = distance[x.to] + 1;

@@ -8,44 +8,25 @@ using namespace __gnu_pbds;
 template<class T> 
 using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define debug(...) cerr<<"[" << #__VA_ARGS__ <<"] --> "; _debug(__VA_ARGS__); cerr << endl
-#define dd(...) cerr<<"[" << #__VA_ARGS__ <<"] --> "; _debug(__VA_ARGS__); cerr << endl
 /////////////////////////////
-void io(){
-	freopen("/home/withtahmid/input.txt", "r", stdin);
-    freopen("/home/withtahmid/output.txt", "w", stdout);
-    freopen("/home/withtahmid/error.txt", "w", stderr);
-}
-////////////////////////////
+const string io_file_path = "/home/withtahmid/SYNC/";
+const string input_file = "input.txt";
+const string output_file = "output.txt";
+const string error_file = "error.txt";
 
-/////////////////////////////
-const char* filename(string path, string file){
-	path += file;
-	path += ".txt";
-	return path.c_str();
+void io(){
+	freopen((io_file_path + input_file).c_str(), "r", stdin);
+    freopen((io_file_path + output_file).c_str(), "w", stdout);
+    freopen((io_file_path + error_file).c_str(), "w", stderr);
 }
-///////////   FULLLL ?????????????????????????????????
-// premitive types
-void full_debug(int x){ 
-	cerr << x; 
-}
-void full_debug(int_fast64_t x){
- cerr << x; 
-}
-void full_debug(unsigned long long x){
- cerr << x; 
-}
-void full_debug(char x){
- cerr << x; 
-}
-void full_debug(string x){
- cerr << x; 
-}
-void full_debug(double x){
- cerr << x; 
-}
-void full_debug(long double x){
- cerr << x;
-}
+
+void full_debug(int x){cerr << x;}
+void full_debug(int_fast64_t x){cerr << x;}
+void full_debug(unsigned long long x){cerr << x; }
+void full_debug(char x){cerr << x;}
+void full_debug(string x){cerr << x;}
+void full_debug(double x){cerr << x;}
+void full_debug(long double x){cerr << x;}
 ///
 
 
@@ -240,6 +221,15 @@ void _debug(vector<T>v){
 	cerr <<"]";
 }
 template<class T>
+void _debug(deque<T>v){
+	cerr <<"[ ";
+	for(T i : v){
+		_debug(i);
+		cerr <<" ";
+	}
+	cerr <<"]";
+}
+template<class T>
 void _debug(set<T>s){
 	cerr <<"[ ";
 	for(T i : s){
@@ -304,8 +294,15 @@ void _debug(queue<T>stk)
 	cerr << " ]";
 }
 
-
-
+char dbgsep = ' ';
+void dbg(){
+	cerr << endl;
+}
+template<typename T, typename... Args>
+void dbg(T value, Args... args) {
+	_debug(value);cerr<<dbgsep;
+	dbg(args...);
+}
 
 
 

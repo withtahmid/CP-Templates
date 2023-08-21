@@ -24,88 +24,52 @@ bool isGreater(double a, double b)
 	return a - b > ESP;
 }
 
-double SQRT(double n)
-{
+double SQRT(double n){
 	double low = 0.0, high = max (1.0, n), result = n;
 	int i = 100;
-	while(low <= high && i--)
-	{
+	while(low <= high && i--){
 		double mid = low + (high-low) / 2;
 		double result = mid*mid;
-		if(isEqual(result,n))
-		{
+		if(isEqual(result,n)){
 			return mid;
-		}
-		else if(result>n)
-		{
+		}else if(result>n){
 			high = mid - ESP;
-		}
-		else
-		{
+		}else{
 			low = mid + ESP;
 		}
-
 	}
 	return result;
 }
 
-bool isPrinmeF(int n)
-{
-	if(n<=1)
+bool isPrinmeF(int n){
+	if(n<=1){
 		return false;
-	for(int i =2; i*i <= n; i++)
-	{
-		if(n%i == 0)
-		{
+	}
+	for(int i = 2; i*i <= n; i++){
+		if(n%i == 0){
 			return false;
 		}
 	}
 	return true;
 }
-
-bool isDivisible(string str, int n)
-{
+bool bigMod(string str, int n){
 	int rem = 0;
-	for (int i = 0; i < str.size(); ++i)
-	{
-		rem = ((rem*10) + (str[i] - '0'))%n;
-	}
-	return rem == 0;
-}
-
-bool div(string str, int n)
-{
-	int rem = 0;
-	for (int i = 0; i < str.size(); ++i)
-	{
+	for (int i = 0; i < str.size(); ++i){
 		rem = ((rem*10) + (str[i] - '0'))%n;
 	}
 	return rem;
 }
 
-int reverse_int(int n)
-{
-	int result  = 0;
-	while(n>0)
-	{
-		result = (result*10) + (n%10);
-		n/=10;
-	}
-	return result;
-}
 
-int GCD(int a, int b)
-{
-	if(b==0)
-	{
+int GCD(int a, int b){
+	if(b == 0){
 		return a;
 	}
 	return GCD(b, a%b);
 }
 
-int LCM(int a, int b)
-{
-	return (a/GCD(a,b))*b;
+int LCM(int a, int b){
+	return (a/__gcd(a,b))*b;
 }
 
 
@@ -114,49 +78,30 @@ int LCM(int a, int b)
 const int N = 1e6 + 5;
 bool isPrime[N];
 vector<int> primes;
-
-void sieve()
-{
-	for(int i = 1; i <= N; i++)
-	{
+void sieve(){
+	for(int i = 1; i <= N; i++){
 		isPrime[i] = true;
 	}
 	isPrime[1] = false;
-	for(int i = 4; i<= N; i+=2)
-	{
+	for(int i = 4; i <= N; i += 2){
 		isPrime[i] = false;
 	}
-	for(int i = 3; i*i <= N; i+=2)
-	{
-		if(isPrime[i])
-		{
-			for(int j = i*i; j<= N; j+= 2*i)
-			{
+	for(int i = 3; i*i <= N; i+=2){
+		if(isPrime[i]){
+			for(int j = i*i; j<= N; j+= 2*i){
 				isPrime[j] = false;
 			}
-		}
-	}
-
-	for (int i = 0; i <= N; ++i)
-	{
-		if(isPrime[i])
-		{
-			primes.push_back(i);
 		}
 	}
 }
 
 vector<int> divisors;
-void generateDivisors(int n)
-{
+void generateDivisors(int n){
 	divisors.clear();
-	for(int i = 1; i*i <= n; i++)
-	{
-		if(n%i == 0)
-		{
+	for(int i = 1; i*i <= n; i++){
+		if(n%i == 0){
 			divisors.push_back(i);
-			if( i!= (n/i))
-			{
+			if( i!= (n/i)){
 				divisors.push_back(n/i);
 			}
 		}
@@ -165,15 +110,9 @@ void generateDivisors(int n)
 
 
 int NOD[N];
-void NOD_Function()
-{
-	for(int i = 0; i <= N; i++){
-		NOD[i] = 0;
-	}
-	for(int i = 1; i <= N; i++)
-	{
-		for(int j = i; j <= N; j+=i)
-		{
+void nod(){
+	for(int i = 1; i <= N; i++){
+		for(int j = i; j <= N; j+=i){
 			NOD[j]++;
 		}
 	}
@@ -181,68 +120,38 @@ void NOD_Function()
 }
 
 int SOD[N];
-void SOD_Function()
-{
-	for(int i = 0; i <= N; i++){
-		NOD[i] = 0;
-	}
-	for(int i = 1; i <= N; i++)
-	{
-		for(int j = i; j <= N; j+=i)
-		{
+void sod(){
+	for(int i = 1; i <= N; i++){
+		for(int j = i; j <= N; j+=i){
 			NOD[j]+=i;
 		}
 	}
 }
-
-//Prime Factorization
-vector<int> prime_factorize(int n)
-{
-	vector<int> result;
-	for(int i : primes)
-	{
-		if( i*i > n)
-		{
-			break;
-		}
-		while(n % i == 0)
-		{
-			n /= i;
-			result.push_back(i);
-		}
-	}
-	if(n != 1)
-		result.push_back(n);
-	return result;
-}
-
 ///Returns the complete list of (factor, exponent) pairs
-vector<pair<int, int>> prime_factorize_as_pair(int n) 
-{
+vector<pair<int, int>> prime_factorize_as_pair(int n){
 	vector<pair<int, int>> result;
-	for (int p : primes) 
-	{
+	for (int p : primes){
 		if (p * p > n) 
 			break;
-        if (n % p == 0) 
-    	{
+        if (n % p == 0){
     		int expo = 0;
-    		while (n % p == 0) 
-			{
+    		while (n % p == 0){
 				++expo;
 				n /= p;
 			}
 			result.push_back(make_pair(p, expo));
 		}
 	}
-    if (n != 1) {result.push_back(make_pair(n, 1));}return result;
+    if (n != 1) {
+    	result.push_back(make_pair(n, 1));
+    }
+    return result;
 }
 ///primeFactorWithPower
 void primeFactorWithPower(ll n)
 {
 	int cnt=0;
-	while(n%2==0)
-	{
+	while(n%2==0){
 		n=n/2;cnt++;
 	}
 	if(cnt>0)
@@ -295,36 +204,29 @@ bool LeapYear_string(string yr)
 }
 
 ///BigMod
-int Bigmod(int base, int power, int mod)
-{
+int Bigmod(int base, int power, int mod){
 	if(power==0)
 		return 1;
-	else if(power%2==1)
-	{
+	else if(power%2==1){
 		int a=base%mod;
 		int b=(Bigmod(base, power-1,mod))%mod;
 		return (a*b)%mod;
 	}
-	else
-    {
+	else{
 		int a=(Bigmod(base,power/2,mod))%mod;
 		return (a*a)%mod;
 	}
 }
 
-int multiply(int x, int res[], int res_size)
-{
+int multiply(int x, int res[], int res_size){
     int carry = 0;
-
-    for (int i=0; i<res_size; i++)
-    {
+    for (int i=0; i<res_size; i++){
         int prod = res[i] * x + carry;
         res[i] = prod % 10;  
         carry  = prod/10;    
     }
 
-    while (carry)
-    {
+    while (carry){
         res[res_size] = carry%10;
         carry = carry/10;
         res_size++;
@@ -332,16 +234,14 @@ int multiply(int x, int res[], int res_size)
     return res_size;
 }
 
-void factorial(int n)
-{
+void factorial(int n){
 	int MAX = 500;
     int res[MAX];
 
     res[0] = 1;
     int res_size = 1;
 
-    for (int x=2; x<=n; x++)
-    {
+    for (int x=2; x<=n; x++){
         res_size = multiply(x, res, res_size);
     }
 
@@ -420,8 +320,7 @@ int val(char c)
         (int)c - 'A' + 10;
 }
 
-int toDeci(string str, int base)
-{
+int toDeci(string str, int base){
 	int len = str.size(); int power = 1; // Initialize power of base
 	int num = 0;  
 	int i;
@@ -461,8 +360,7 @@ string DecimalToBinary(int n)
 }
 
 //BalancedParentheses
-bool isBalancedParentheses(const string& str)
-{
+bool isBalancedParentheses(const string& str){
     int n = str.size();
     stack <char> st;
     for(int i = 0; i < n; i++)
@@ -487,8 +385,7 @@ bool isBalancedParentheses(const string& str)
     return false;
 }
 
-bool areBracketsBalanced(string expr)
-{
+bool areBracketsBalanced(string expr){
     stack<char> temp;
         for(int i=0; i<expr.length(); i++)
         {
@@ -509,8 +406,7 @@ bool areBracketsBalanced(string expr)
 }
 
 ///largest area of same base in a Histogram
-int getMaxArea(vector<int>v, int n)
-{
+int getMaxArea(vector<int>v, int n){
 
     stack<int> s;
 
@@ -555,74 +451,6 @@ void decToHexa(int n)
 	cout << hex << n << endl; 
 }
 
-///*Syntax
-//cout<<precission<<setprecision(2)<<endl;
-///G - Etruscan Warriors Never Play Chess
-//long long fin = (sqrt(n*8+1)-1)/2;
-/*
-
-/// there is number N, then a sequence 1,2,3...
-///Now we have to find minimum possible sum difference
-/// of two sum set
-/// N=3, A=(1,2,3)
-/// x={1,2} = 3
-/// y={3} = 3
-///x-y = 0
-ll rem = n%4;
-    if(rem == 1 || rem==2)
-        cout<<1<<endl;
-    else
-        cout<<0<<endl;
-
-
-	HEXA to DECI
-	int x, y;
-    std::stringstream stream;
-
-    std::cin >> x;
-    stream << x;
-    stream >> std::hex >> y;
-    std::cout << y;
-
-///deque
-deque<int>dq;
-q.push_front();
-q.push_back();
-q.pop_back();
-q.pop_front();
-q.empty();
-q.front();
-q.back();
-
-///Queue
-queue<int>q;
-q.push();
-q.pop();
-q.empty();
-q.front();
-///FIFO
-
-///Stack
-stack<int>s;
-s.push();
-s.pop();
-s.empty();
-s.top();
-///LIFO
-
-int *ptr = upper_bound(a,a+n,x); //it returns its shortest elder value;
-int *ptr = upper_bound(a+4,a+n,x);
-auto it = upper_bound(a.begin(),a.end(),x);
-if(ptr==a+n) cout<<"not found";
-if(it=a.end()) cout<<"not found";
-///Lower Bound
-*ptr = lower_bound(a,a+n,x); //if x exist then it will return x but it is not it returns it shortest elder value;
-*ptr = lower_bound(a+4,a+n,x);
-
-
-*/
-
-
 bool isLeapYear(int year)
 {
 
@@ -639,11 +467,5 @@ using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_st
 /////////////////
 int main()
 {
-	test_case{
-		string str;
-		cin>>str;
-		int s1 = (str[0] - '0') + (str[1]-'0') + (str[2]-'0');
-		int s2 = (str[3] - '0') + (str[4]-'0') + (str[5]-'0');
-		s1 == s2 ? cout<<"YES\n" : cout<<"NO\n";
-	}
+
 }

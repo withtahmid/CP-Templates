@@ -5,7 +5,7 @@
  * Updated: 09-08-22 02:52
  * Updated: 30-08-22 20:40
  * Updated: 23-10-22 03:45
- * Updated: 14-12-22 02:50
+ * Updated: 14-12-22 03:17
  * 
  * */
 #include<bits/stdc++.h>
@@ -15,7 +15,7 @@
 #include <fstream>
 using namespace std;
 string dateNtime = " * Created: ";
-string path = "";
+string path = "SYNC/";
 string random_filename;
 int numOfFile;
 string random_name = "";
@@ -60,7 +60,7 @@ bool generate_path()
 	else if(c == 'r' || c == 'R')
 	{
 		cin >> random_filename;
-		path += "Codes/Random/";
+		path += "Random/";
 		numOfFile = 1;
 		return false;
 	}

@@ -126,11 +126,17 @@ void primeFactorWithPower(ll n)
 for(ll i=3;i*i<=n;i+=2){int cnt=0;while(n%i==0){n/=i;cnt++;}if(cnt>0) cout<<i<<"^"<<cnt<<" ";}if(n>2)cout<<n<<"^1"<<endl;}
 
 ///Prime-factorization of factorial
-vector<pair<int, int>> factorize_factorial_v2(int n) {vector<pair<int, int>> result;for (auto p : primes) {if (p > n) break;int expo = 0;
+vector<pair<int, int>> factorize_factorial_v2(int n) {
+    vector<pair<int, int>> result;
+    for (auto p : primes) {
+        if (p > n)
+         break;
+        int expo = 0;
         // copy n to a temporary variable
         auto n_tmp = n;
         // get occurence-count of p^1
-        auto q = n_tmp / p;while (q > 0) {
+        auto q = n_tmp / p;
+        while (q > 0) {
             // add current occurence-count
             expo += q;
             // update "temporary n" to current quotient
